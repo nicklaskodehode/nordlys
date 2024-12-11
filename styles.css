@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap+Condensed:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  box-sizing: border-box;
+  background-color: #16003a;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+#bigCircles {
+  display: flex;
+  position: absolute;
+}
+
+#backgroundColor1,
+#backgroundColor2,
+#backgroundColor3,
+#backgroundColor4 {
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  filter: blur(300px);
+  position: absolute;
+}
+
+#backgroundColor1 {
+  background-color: rgba(33, 173, 33, 0.4);
+  margin-left: 0px;
+  margin-top: -400px;
+  animation: move1 15s infinite alternate;
+}
+
+#backgroundColor2 {
+  background-color: rgba(33, 35, 173, 0.4);
+  margin-left: 300px;
+  margin-top: -400px;
+  animation: move2 18s infinite alternate;
+}
+
+#backgroundColor3 {
+  background-color: rgba(33, 173, 33, 0.4);
+  margin-left: -900px;
+  margin-top: 200px;
+  animation: move3 20s infinite alternate;
+}
+
+#backgroundColor4 {
+  background-color: rgba(173, 30, 101, 0.4);
+  margin-left: 1000px;
+  margin-top: 600px;
+  animation: move4 23s infinite alternate;
+}
+
+#smallCircles {
+  display: flex;
+  position: absolute;
+}
+
+.smallCircles {
+  width: 50px;
+  height: 800px;
+  background-color: rgba(0, 255, 255, 0.4);
+  border-radius: 50%;
+  margin-right: 170px;
+  filter: blur(50px);
+  animation: slide 10s infinite alternate;
+}
+
+#smallCircles1 {
+  animation-delay: 0s;
+}
+#smallCircles2 {
+  animation-delay: 8s;
+}
+#smallCircles3 {
+  animation-delay: 10s;
+}
+#smallCircles4 {
+  animation-delay: 6s;
+}
+#smallCircles5 {
+  animation-delay: 4s;
+}
+#smallCircles6 {
+  animation-delay: 2s;
+}
+#smallCircles7 {
+  animation-delay: 12s;
+}
+
+@keyframes move1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(400px, 300px);
+  }
+}
+
+@keyframes move2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-500px, -500px);
+  }
+}
+
+@keyframes move3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(600px, 400px);
+  }
+}
+
+@keyframes move4 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-300px, -300px);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(500px);
+  }
+}
+
+.layoutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.navbar{
+    margin-top: 10px;
+}
+
+.navBtn {
+  background-color: rgb(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  width: 200px;
+  height: 50px;
+  font-size: 25px;
+  font-family: "Asap Condensed", sans-serif;
+  cursor: pointer;
+}
+
+.searchBar{
+    width: 500px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: white;
+    padding-left: 10px;
+    font-family: "Asap Condensed", sans-serif;
+    font-size: 25px;
+}
+
+.searchBar:focus{
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+#favouriteBtn{
+    margin-top: 10px;
+    margin-right: 720px;
+    background-color: rgb(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    width: 200px;
+    height: 50px;
+    font-size: 25px;
+    font-family: "Asap Condensed", sans-serif;
+    cursor: pointer;
+}
+
+.mainContainer{
+    margin-top: 50px;
+    width: 918px;
+}
+
+.dateInput{
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.text{
+    font-family: "Asap Condensed", sans-serif;
+    font-size: 25px;
+    color: white;
+    padding-right: 10px;
+}
+
+.dateBox{
+    font-family: "Asap Condensed", sans-serif;
+    font-size: 20px;
+    background-color: rgb(255, 255, 255, 0.2);
+    border: none;
+    outline: none;
+    height: 35px;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+.mainContent{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: white;
+    font-family: "Asap Condensed", sans-serif;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+}
+
+.toggleBtn{
+    display: flex;
+    margin-right: 900px;
+    margin-bottom: 440px;
+    position: absolute;
+}
+
+.information{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.favouriteIcon{
+    cursor: pointer;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+}
+
+.headerText{
+    font-family: "Asap Condensed", sans-serif;
+    font-size: 60px;
+    font-weight: 600;
+    margin-top: -5px;
+}
+
+.liveCam{
+    width: 300px;
+    height: 300px;
+    margin-right: 15px;
+}
+
+.auroraInfo{
+    margin-left: 15px;
+    font-size: 25px;
+    width: 500px;
+    margin-top: 1px;
+}
+
+.searchImg{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-top: 15px;
+    margin-left: -35px;
+}
