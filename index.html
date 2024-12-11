@@ -1,13 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
-    <script src="./script.js" defer></script>
-    <title>Nordlys Tracking</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nordlys Tracker</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div id="background">
+      <div id="bigCircles">
+        <div id="backgroundColor1"></div>
+        <div id="backgroundColor2"></div>
+        <div id="backgroundColor3"></div>
+        <div id="backgroundColor4"></div>
+      </div>
+      <div id="smallCircles">
+        <div id="smallCircles1" class="smallCircles"></div>
+        <div id="smallCircles2" class="smallCircles"></div>
+        <div id="smallCircles3" class="smallCircles"></div>
+        <div id="smallCircles4" class="smallCircles"></div>
+        <div id="smallCircles5" class="smallCircles"></div>
+        <div id="smallCircles6" class="smallCircles"></div>
+        <div id="smallCircles7" class="smallCircles"></div>
+      </div>
+    </div>
+    <div class="layoutContainer">
+      <div class="navbar">
+        <input type="button" value="SISTE 7 DAGER" class="navBtn" />
+        <input type="text" placeholder="Søk..." class="searchBar" />
+        <img src="./images/searhbar_icon.png" alt="" class="searchImg" />
+        <input type="button" value="NESTE 24 TIMER" class="navBtn" />
+      </div>
+      <input
+        type="button"
+        value="FAVORITTER"
+        class="navBtn"
+        id="favouriteBtn"
+      />
+      <div class="mainContainer">
+        <div class="dateInput">
+          <p class="text">Sjekk tidligere dato:</p>
+          <input type="date" class="dateBox" />
+        </div>
+        <div class="mainContent">
+          <div class="toggleBtn">
+            <img
+              src="./images/star.png"
+              alt=""
+              class="favouriteIcon"
+              id="favouriteIcon"
+            />
+          </div>
+          <div class="title">
+            <p class="headerText">Placename</p>
+          </div>
+          <div class="information">
+            <img
+              src="./images/livecam_placeholderIMG.jpg"
+              alt=""
+              class="liveCam"
+            />
+            <p class="auroraInfo">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+              repellat omnis quia aliquam voluptate facilis cum recusandae eaque
+              numquam ratione voluptatum vero placeat, necessitatibus
+              repudiandae sint praesentium velit labore quidem?
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
