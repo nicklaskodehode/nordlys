@@ -26,23 +26,50 @@ const long = 6.126711;
 // let url = `https://api.auroras.live/v1/?type=images&image=yellowknife&tz=-60`;
 
 // LOCATION MODULE:
-// let url = `https://api.auroras.live/v1/?type=locations&tz=-60`;
+let url = `https://api.auroras.live/v1/?type=locations&tz=-60`;
 
 // WEATHER MODULE: 
 // WHY YOU NO WORK
 // let url = `https://api.auroras.live/v1/?type=weather&lat=40.7813913&long=-73.976902&tz=-60`;
 // let url = `https://api.auroras.live/v1/?type=weather&lat=40.7813913&long=-73.976902&forecast=true&tz=-60`;
 
+const header = document.querySelector("#headerText");
+const info = document.querySelector("#auroraInfo");
+const infoImg = document.querySelector("#infoImg");
 
 fetch(url)
 .then(response => response.json())
 .then((data) => { 
-  console.log(data);
-})
-.catch(error => console.error(error));
-// const div = document.createElement("p");
-// div.classList.add("test");
- // div.style.color = data.ace.colour.bz;
-  // console.log(div.style.color);
+  console.log(data[0]); // get all data
+  // console.log(data.ace.kp); // get KP data
+    // console.log(data.ace.colour.kp); // get KP colourÅÅ
+  
+    header.textContent = data[0].name
+    const lat = data[0].lat;
+    const long = data[0].long;
+  fetchKPData(lat, long);
+  fetchWeatherImg(lat, long);
+  // for(let key in data){
+  //   console.log(data[key].ace);
+  //   console.log(data[key].threeday);
+  //   console.log(data[key]);
+  // }
+}).catch(error => console.error(error));
 
+function fetchKPData(lat, long){
+  let url = `https://api.auroras.live/v1/?type=ace&data=all&lat=${lat}&long=${long}&tz=-60`;
+  fetch(url)
+.then(response => response.json())
+.then((data) => { console.log(data);
+  info.textContent = "Current KP: " + data.kp + " " + "Bz: "+data.bz + " " + "Density: "+data.density;
+}).catch(error => console.error(error));
+}
+
+function fetchWeatherImg(lat, long){
+  let url = `https://api.auroras.live/v1/?type=weather&lat=40.7813913&long=-73.976902&tz=-60`;
+  fetch(url)
+  .then(response => response.json())
+  .then((data) => { console.log(data)
+  }).catch(error => console.error(error));
+  }
 
