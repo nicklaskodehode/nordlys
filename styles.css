@@ -202,6 +202,7 @@ body {
 .mainContainer{
     margin-top: 50px;
     width: 918px;
+    height: fit-content;
 }
 
 .dateInput{
@@ -382,4 +383,14 @@ body {
         width: 25px;
         height: 25px;
     }
+}
+
+.navBtn.toggled {
+    background: linear-gradient(to right, 
+        rgba(20, 232, 30, 0.7), 
+        rgba(0, 234, 141, 0.7), 
+        rgba(1, 126, 213, 0.7), 
+        rgba(181, 61, 255, 0.7), 
+        rgba(141, 0, 196, 0.7)
+    );
 }
