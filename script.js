@@ -50,30 +50,10 @@ const bz = document.createElement("p");
 const density = document.createElement("p");
 const speed = document.createElement("p");
 
-// let timeNow;
-// let timeTomorrow;
-
 //Fetch location URL
 fetch(url)
 .then(response => response.json())
 .then((data) => { 
-//   for(let i = 0; i <= 1; i++){
-//     for(let j = 0; j < data.threeday.values[i].length; j++){
-//       if (data.threeday.values[i][j].now === true) {
-//         if (i > 0) {
-//           timeTomorrow = data.threeday.values[i].splice(0,j+1); //Gets array time 24 hours from now
-//           console.log(timeTomorrow);
-//         } else {
-//           timeNow = data.threeday.values[i].splice(j); //Gets time now
-//           console.log(timeNow);
-//         }
-//       }
-//     }
-//   }
-// timeNow.forEach(element => {
-//   console.log(element.value);
-// });
-
   const getRandomLocation = Object.keys(data); //Get the keys in the object
   const locationNum = Math.floor(Math.random(getRandomLocation)*getRandomLocation.length);   //Creates a random number from the getRandomLocation array
   header.textContent = data[locationNum].name;
@@ -90,8 +70,6 @@ function fetchKPData(lat, long){
   fetch(url)
 .then(response => response.json())
 .then((data) => { 
-
-
 
   //Sets kp and bz data and color
   kp.textContent = "Current KP: "+ data.kp;
@@ -162,7 +140,6 @@ function fetchKPData(lat, long){
 function fetchWeatherImg(lat, long){
   let url = `https://api.auroras.live/v1/?type=embed&image=weather&lat=${lat}&long=${long}&tz=-60`;
   infoImg.src = url;
-  fetch(url)
-  .then(response => response.json()).catch(error => console.error(error));
+  fetch(url).catch(error => console.error(error));
   }
 
