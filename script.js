@@ -7,7 +7,7 @@ const lat = 62.197089;
 const long = 6.126711;
 
 // ALL MODULE:
-// let url = `https://api.auroras.live/v1/?type=all&lat=62.197089&long=6.126711&forecast=false&twentysevenday=true`;
+// let url = `https://api.auroras.live/v1/?type=all&lat=62.197089&long=6.126711&forecast=false&threeday=true`;
 
 // ACE MODULE:
 // let url = `https://api.auroras.live/v1/?type=ace&data=all&lat=62.197089&long=6.126711&tz=-60`;
@@ -43,11 +43,37 @@ const header = document.querySelector("#headerText");
 const info = document.querySelector("#auroraInfo");
 const infoImg = document.querySelector("#infoImg");
 
+//Creates html elements
+const chanceText = document.createElement("p");
+const kp = document.createElement("p");
+const bz = document.createElement("p");
+const density = document.createElement("p");
+const speed = document.createElement("p");
+
+// let timeNow;
+// let timeTomorrow;
 
 //Fetch location URL
 fetch(url)
 .then(response => response.json())
 .then((data) => { 
+//   for(let i = 0; i <= 1; i++){
+//     for(let j = 0; j < data.threeday.values[i].length; j++){
+//       if (data.threeday.values[i][j].now === true) {
+//         if (i > 0) {
+//           timeTomorrow = data.threeday.values[i].splice(0,j+1); //Gets array time 24 hours from now
+//           console.log(timeTomorrow);
+//         } else {
+//           timeNow = data.threeday.values[i].splice(j); //Gets time now
+//           console.log(timeNow);
+//         }
+//       }
+//     }
+//   }
+// timeNow.forEach(element => {
+//   console.log(element.value);
+// });
+
   const getRandomLocation = Object.keys(data); //Get the keys in the object
   const locationNum = Math.floor(Math.random(getRandomLocation)*getRandomLocation.length);   //Creates a random number from the getRandomLocation array
   header.textContent = data[locationNum].name;
@@ -65,12 +91,7 @@ function fetchKPData(lat, long){
 .then(response => response.json())
 .then((data) => { 
 
-  //Creates html elements
-  const chanceText = document.createElement("p");
-  const kp = document.createElement("p");
-  const bz = document.createElement("p");
-  const density = document.createElement("p");
-  const speed = document.createElement("p");
+
 
   //Sets kp and bz data and color
   kp.textContent = "Current KP: "+ data.kp;
@@ -84,12 +105,14 @@ function fetchKPData(lat, long){
   //If theres no speed data, use randomSpeed data
   if (data.speed === "Speed") {
     speed.textContent = "Speed: "+randomSpeed[getRandomSpeedIndex];
-    if(randomSpeed[getRandomSpeedIndex] < 250) {
+    if(randomSpeed[getRandomSpeedIndex] < 350) {
       speed.style.color = "green";
-    }else if (randomSpeed[getRandomSpeedIndex] > 250 && randomSpeed[getRandomSpeed] < 400)
+    }else if (randomSpeed[getRandomSpeedIndex] 	>= 350 && randomSpeed[getRandomSpeed] < 500)
       speed.style.color = "yellow";
-    else {
-    speed.style.color = "red";
+    else if(randomSpeed[getRandomSpeedIndex] 	>= 500 && randomSpeed[getRandomSpeed] < 700){
+    speed.style.color = "orange";
+    } else {
+      speed.style.color = "red";
     }    
   } else { //Else use API data
     speed.textContent = "Speed: " +data.speed;
@@ -100,12 +123,14 @@ function fetchKPData(lat, long){
   //If theres no density data, use randomDensity data
   if (data.density === "Density") {
     density.textContent = "Density : "+randomDensity[getRandomDensity];
-    if(randomDensity[getRandomDensity] < 3) {
+    if(randomDensity[getRandomDensity] < 4) {
       density.style.color = "green";
-    }else if (randomDensity[getRandomDensity] > 3 && randomDensity[getRandomDensity] < 5)
+    }else if (randomDensity[getRandomDensity] >= 4 && randomDensity[getRandomDensity] < 10)
       density.style.color = "yellow";
-    else {
-     density.style.color = "red";
+    else if(randomDensity[getRandomDensity] >= 10 && randomDensity[getRandomDensity] <= 15) {
+     density.style.color = "orange";
+    } else {
+      density.style.color = "red";
     }
   } else { //Else use API data
     density.textContent = "Density : " +data.density;
