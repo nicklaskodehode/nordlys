@@ -281,7 +281,7 @@ body {
 }
 
 .liveCam{
-    width: 300px;
+    width: 500px;
     height: 300px;
     margin-right: 15px;
 }
@@ -289,7 +289,7 @@ body {
 .auroraInfo{
     margin-left: 15px;
     font-size: 25px;
-    width: 500px;
+    width: 300px;
     margin-top: 1px;
 }
 
@@ -300,3 +300,4 @@ body {
     margin-top: 15px;
     margin-left: -35px;
 }
+
