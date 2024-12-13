@@ -9,7 +9,10 @@ const timer = document.getElementById("24neste");
 timer.addEventListener("click", function () {
   let timeNow;
   let timeTomorrow;
-
+  const toggle24Timer = document.querySelector("#timer24");
+  info.style.display = "none";
+  toggle24Timer.style.display = "flex";
+  toggle24Timer.style.flexDirection = "column";
     timer.classList.toggle("toggled");
 
   let url = `https://api.auroras.live/v1/?type=all&lat=62.197089&long=6.126711&forecast=false&threeday=true`;
@@ -32,6 +35,20 @@ timer.addEventListener("click", function () {
       }
       console.log(timeNow);
       console.log(timeTomorrow);
+
+      for(let i in timeNow){
+       
+        const timeNowData = document.createElement("p");
+        timeNowData.textContent = timeNow[i].start.slice(11, 16) + "-" + timeNow[i].end.slice(11, 16) + " - KPI: " + timeNow[i].value;
+        toggle24Timer.appendChild(timeNowData);
+      }
+        for(let i in timeTomorrow){
+        const timeTomorrowData = document.createElement("p");
+        timeTomorrowData.textContent = timeTomorrow[i].start.slice(11, 16) + "-" + timeTomorrow[i].end.slice(11, 16) + " - KPI: " + timeTomorrow[i].value;
+        toggle24Timer.appendChild(timeTomorrowData);
+      }
+        
+        
     })
     .catch((error) => console.error(error));
 });
@@ -54,11 +71,10 @@ favouriteIcon.addEventListener("click", function () {
     }
 });
 
-const toggle24Timer = document.querySelector("#24timer");
 
-array.forEach(element => {
-    
-});
+
+
+
 // API Documentation http://auroraslive.io/#/api/v1
 
 // tz (timezone) changes the timezone. -60 gives our timezone

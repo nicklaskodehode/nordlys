@@ -394,3 +394,9 @@ body {
         rgba(141, 0, 196, 0.7)
     );
 }
+
+#timer24{
+    font-size: 25px;
+    display: none;
+
+}
