@@ -1,80 +1,3 @@
-// const dager = document.getElementById("7dager");
-
-// dager.addEventListener("click", function () {
-//   alert("Skal vise nordlyset som var de siste 7 dagene");
-// });
-
-const timer = document.getElementById("24neste");
-
-timer.addEventListener("click", function () {
-  let timeNow;
-  let timeTomorrow;
-  const toggle24Timer = document.querySelector("#timer24");
-  info.style.display = "none";
-  toggle24Timer.style.display = "flex";
-  toggle24Timer.style.flexDirection = "column";
-    timer.classList.toggle("toggled");
-
-  let url = `https://api.auroras.live/v1/?type=all&lat=62.197089&long=6.126711&forecast=false&threeday=true`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      for (let i = 0; i <= 1; i++) {
-        for (let j = 0; j <= data.threeday.values[i].length-1; j++) {
-      
-          if (data.threeday.values[i][j].now === true) {
-            // console.log(data.threeday.values[i][j])
-            if (i > 0) {
-              timeTomorrow = data.threeday.values[i].splice(0, j + 1);
-            } else {
-              timeNow = data.threeday.values[i].splice(j);
-            }
-           
-          }
-        }
-      }
-      console.log(timeNow);
-      console.log(timeTomorrow);
-
-      for(let i in timeNow){
-       
-        const timeNowData = document.createElement("p");
-        timeNowData.textContent = timeNow[i].start.slice(11, 16) + "-" + timeNow[i].end.slice(11, 16) + " - KPI: " + timeNow[i].value;
-        toggle24Timer.appendChild(timeNowData);
-      }
-        for(let i in timeTomorrow){
-        const timeTomorrowData = document.createElement("p");
-        timeTomorrowData.textContent = timeTomorrow[i].start.slice(11, 16) + "-" + timeTomorrow[i].end.slice(11, 16) + " - KPI: " + timeTomorrow[i].value;
-        toggle24Timer.appendChild(timeTomorrowData);
-      }
-        
-        
-    })
-    .catch((error) => console.error(error));
-});
-
-// const favoritter = document.getElementById("favouriteBtn");
-
-// favoritter.addEventListener("click", function () {
-//   alert("Lagt til i favoritter");
-// });
-
-
-const favouriteIcon = document.getElementById("favouriteIcon");
-
-favouriteIcon.addEventListener("click", function () {
-
-    if (favouriteIcon.src.includes("star.png")) {
-        favouriteIcon.src = "./images/toggled.png";
-    } else {
-        favouriteIcon.src = "./images/star.png";
-    }
-});
-
-
-
-
-
 // API Documentation http://auroraslive.io/#/api/v1
 
 // tz (timezone) changes the timezone. -60 gives our timezone
@@ -106,12 +29,10 @@ const long = 6.126711;
 let url = `https://api.auroras.live/v1/?type=locations&tz=-60`;
 
 // WEATHER MODULE: 
-// WHY YOU NO WORK
 // let url = `https://api.auroras.live/v1/?type=weather&lat=40.7813913&long=-73.976902&tz=-60`;
 // let url = `https://api.auroras.live/v1/?type=weather&lat=40.7813913&long=-73.976902&forecast=true&tz=-60`;
 
-
-//Array of random dummy values if values are not available
+//Array of random dummy values if data is not available for speed or density
 const randomSpeed = [242.5, 353.6, 413.2, 98.8, 135.7];
 const randomDensity = [2.18, 5.61, 3.32, 6.43, 10.65];
 
@@ -119,6 +40,11 @@ const randomDensity = [2.18, 5.61, 3.32, 6.43, 10.65];
 const header = document.querySelector("#headerText");
 const info = document.querySelector("#auroraInfo");
 const infoImg = document.querySelector("#infoImg");
+const searchInput = document.querySelector("#search");
+const timer24Btn = document.querySelector("#timer24Btn");
+const favoritter = document.querySelector("#favouriteBtn");
+const favouriteIcon = document.querySelector("#favouriteIcon");
+const toggle24Timer = document.querySelector("#timer24");
 
 //Creates html elements
 const chanceText = document.createElement("p");
@@ -127,10 +53,11 @@ const bz = document.createElement("p");
 const density = document.createElement("p");
 const speed = document.createElement("p");
 
-//Fetch location URL
+
+//Fetch location URL and show a random locations data
 fetch(url)
 .then(response => response.json())
-.then((data) => { 
+.then((data) => {
   const getRandomLocation = Object.keys(data); //Get the keys in the object
   const locationNum = Math.floor(Math.random(getRandomLocation)*getRandomLocation.length);   //Creates a random number from the getRandomLocation array
   header.textContent = data[locationNum].name;
@@ -138,8 +65,8 @@ fetch(url)
   const long = data[locationNum].long; 
   fetchKPData(lat, long);  
   fetchWeatherImg(lat, long); 
+  next24Hours(lat, long);
 }).catch(error => console.error(error));
-
 
 //Fetch KP data from url and use lat and long to fetch specific location data
 function fetchKPData(lat, long){
@@ -195,11 +122,11 @@ function fetchKPData(lat, long){
   //Set auroraPosibilty text depending on the KP data
   let auroraPosibility = "";
   if (data.kp < 3) {
-    auroraPosibility = "There's low chance to see the aurora at this time - Sad :(";
+    auroraPosibility = "There's low chance to see the aurora at this time";
   } else if(data.kp > 3 && data.kp < 5){
-    auroraPosibility = "There's a moderate chance to see the aurora at this time - Oh?";
+    auroraPosibility = "There's a moderate chance to see the aurora at this time";
   } else {
-    auroraPosibility = "There's a high chance to see the aurora at this time - yippie :D";
+    auroraPosibility = "There's a high chance to see the aurora at this time";
   }
   chanceText.textContent = auroraPosibility;
 
@@ -213,10 +140,79 @@ function fetchKPData(lat, long){
 }).catch(error => console.error(error));
 }
 
-//Fetch weather image
+
+//Function to Fetch and show weather image
 function fetchWeatherImg(lat, long){
   let url = `https://api.auroras.live/v1/?type=embed&image=weather&lat=${lat}&long=${long}&tz=-60`;
   infoImg.src = url;
   fetch(url).catch(error => console.error(error));
   }
+
+//Function to fetch and show data for the next 24 hours
+function next24Hours(lat, long) {
+  let timeNow;
+  let timeTomorrow;
+
+    let url = `https://api.auroras.live/v1/?type=all&lat=${lat}&long=${long}&forecast=false&threeday=true`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        for (let i = 0; i <= 1; i++) {
+          for (let j = 0; j <= data.threeday.values[i].length - 1; j++) {
+            if (data.threeday.values[i][j].now === true) { 
+              if (i > 0) {
+                timeTomorrow = data.threeday.values[i].splice(0, j + 1);
+              } else {
+                timeNow = data.threeday.values[i].splice(j); 
+              }
+            }
+          }
+        }
+
+        for (let i in timeNow) {
+          const timeNowData = document.createElement("p");
+          timeNowData.textContent =
+            timeNow[i].start.slice(11, 16) + "-" + timeNow[i].end.slice(11, 16) + " - KPI: " + timeNow[i].value;
+          toggle24Timer.appendChild(timeNowData);
+        }
+        for (let i in timeTomorrow) {
+          const timeTomorrowData = document.createElement("p");
+          timeTomorrowData.textContent =
+            timeTomorrow[i].start.slice(11, 16) + "-" + timeTomorrow[i].end.slice(11, 16) + " - KPI: " + timeTomorrow[i].value;
+          toggle24Timer.appendChild(timeTomorrowData);
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+
+//eventlistener to toggle next 24 hours data
+timer24Btn.addEventListener("click", () => {
+  if (info.style.display === "none") {
+    info.style.display = "block";
+    toggle24Timer.style.display = "none";
+    timer24Btn.classList.remove("toggled");
+  } else {
+    info.style.display = "none";
+    toggle24Timer.style.display = "flex";
+    toggle24Timer.style.flexDirection = "column";
+    timer24Btn.classList.add("toggled");
+  }
+});
+
+//eventlistener to show favorites
+favoritter.addEventListener("click", function () {
+  alert("Lagt til i favoritter");
+});
+
+
+//eventlistener to toggle favorite icon
+favouriteIcon.addEventListener("click", function () {
+
+    if (favouriteIcon.src.includes("star.png")) {
+        favouriteIcon.src = "./images/toggled.png";
+    } else {
+        favouriteIcon.src = "./images/star.png";
+    }
+});
 

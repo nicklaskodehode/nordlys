@@ -398,5 +398,8 @@ body {
 #timer24{
     font-size: 25px;
     display: none;
-
+}
+#timer24:active{
+  display: flex;
+  flex-direction: column;
 }
