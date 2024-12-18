@@ -53,6 +53,7 @@ const bz = document.createElement("p");
 const density = document.createElement("p");
 const speed = document.createElement("p");
 
+try {
 
 //Fetch location URL and show a random locations data
 fetch(url)
@@ -216,3 +217,6 @@ favouriteIcon.addEventListener("click", function () {
     }
 });
 
+} catch (error) {
+  console.log(error);
+}
